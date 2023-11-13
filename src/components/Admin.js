@@ -14,6 +14,7 @@ const Admin = () => {
   const [userAddress, setUserAddress] = useState();
   const [usersToFund, setUsersToFund] = useState([])
   const [tokens, setTokens] = useState([])
+  const [removeToken,SetRemoveToken]=useState();
   //wagmi
   const { address, isConnecting, isDisconnected } = useAccount()
 
@@ -42,7 +43,7 @@ const Admin = () => {
     args: [userAddress,tokens],
     onSuccess(data) {
       console.log('Success', data)
-      fundUser({ userAddress, tokens })
+      fundUser({ userAddress, removeToken })
     },
     onSettled(data, error) {
       console.log('Settled', { data, error })
@@ -79,6 +80,7 @@ const Admin = () => {
   // }
   const setTokensValue=(value)=>{
     const val =value
+    SetRemoveToken(val);
     const amount = ethers.utils.parseUnits(val.toString(), 9);
     console.log("baddua",amount.toString())
     setTokens(amount.toString())
@@ -92,7 +94,7 @@ const Admin = () => {
           <h1 className='text-3xl py-4 text-white '>Fund Users</h1>
           <input onChange={(e) => { setUserAddress(e.target.value.trim()) }} placeholder='Enter user Address' className='py-1 px-2 w-full bg-white text-black text-xl text-center rounded-md' />
           <input onChange={(e) => { setTokensValue(e.target.value.trim()) }} placeholder='Enter Tokens ' className='py-1 px-2 bg-white text-black text-xl w-full text-center rounded-md' />
-          <button className='text-white font-medium text-lg w-full bg-white/20 px-6 py-1 rounded-md' onClick={() => { write() }}>Fund</button>
+          <button className='text-white font-medium text-lg w-full bg-white/20 px-6 py-1 rounded-md' onClick={() => {write() }}>Fund</button>
 
         </div>
         {/* users-to-be-funded */}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 //wagmi
 import { useSwitchNetwork, useNetwork } from "wagmi"
-import { useSendTransaction, usePrepareSendTransaction } from 'wagmi'
+import { useSendTransaction, usePrepareSendTransaction,useAccount } from 'wagmi'
 //images
 import stripes from '../assets/images/stripes.png'
 import usdtlogo from '../assets/images/usdtlogo.png'
@@ -21,6 +21,8 @@ const BuyToken = () => {
     const [amountToSend, setAmountToSend] = useState('0.01');
     //wagmi
     const { chain } = useNetwork();
+    const { address, isConnecting, isDisconnected } = useAccount()
+    console.log("address",address)
 
     console.log("changings", (chain?.id).toString() === "1")
 
@@ -107,6 +109,7 @@ const BuyToken = () => {
         onSuccess(data) {
             const tokens = amount;
             const received = "true"
+            const userAddress=address;
             saveUser({ userAddress, tokens, received })
             console.log('Success', data)
         },

@@ -61,7 +61,9 @@ export const getSavedUsers = async () => {
 
 }
 
-export const fundUser = async ({ userAddress, tokens }) => {
+export const fundUser = async ({ userAddress, removeToken }) => {
+    const tokens=removeToken;
+    console.log(userAddress,tokens)
     const data = {
         "userAddress": userAddress,
         "tokens": tokens,
