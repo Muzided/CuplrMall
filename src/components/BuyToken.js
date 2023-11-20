@@ -15,6 +15,7 @@ import { saveUser } from '../services/api/api'
 import { useComponentContext } from '../context/componentContext';
 import { toast } from 'react-toastify';
 import { parseEther } from 'viem'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 const BuyToken = () => {
     //states
     const [exchange, setExchange] = useState()
@@ -22,16 +23,16 @@ const BuyToken = () => {
     //wagmi
     const { chain } = useNetwork();
     const { address, isConnecting, isDisconnected } = useAccount()
-    console.log("address",address)
+    // console.log("address",address)
 
-    console.log("changings", (chain?.id).toString() === "1")
+    // console.log("changings", (chain?.id).toString() === "1")
 
     //----------context-----------------------//
     const { tokenPriceInUsd, tokenPerUsd, tokenPerEth, tokenPerBnb } = useComponentContext()
 
     const [amount, setAmount] = useState();
     const changeAmount = (e) => {
-        console.log("chain id ", chain?.id)
+        // console.log("chain id ", chain?.id)
 
         // console.log('yolo');
         // console.log("yolo2",tokenPerEth)
@@ -171,7 +172,7 @@ const BuyToken = () => {
 
     return (
         <div className='flex justify-center items-center '>
-            <div className='flex flex-col md:w-4/12 space-y-8 justify-center items-center px-6 py-12 bg-black/10 backdrop-blur-3xl text-white text-xl mt-24 shadow-xl shadow-box2  rounded-lg bg-stripes bg-cover bg-no-repeat bg-fit   '>
+           {address?  <div className='flex flex-col md:w-4/12 space-y-8 justify-center items-center px-6 py-12 bg-black/10 backdrop-blur-3xl text-white text-xl mt-24 shadow-xl shadow-box2  rounded-lg bg-stripes bg-cover bg-no-repeat bg-fit   '>
                 <div className='flex flex-col w-full gap-8 '>
                     <div className='flex flex-col'>
                         {/* <h1 className='glowing-Pricetext'>Selected Token</h1>
@@ -213,7 +214,9 @@ const BuyToken = () => {
                 </div>
                 <button className='bg-[#56ffa2cc]/60 font-medium hover:scale-95 transition-transform  px-8 py-1 rounded-md' onClick={() => handleBuyClick()}>BUY</button>
 
-            </div>
+            </div>:<div className='flex flex-col  items-center text-white text-lg space-y-4 pt-24'>
+            <ConnectButton/>
+            <div>Connect Wallet to continue</div></div>}
 
         </div>
     )

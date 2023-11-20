@@ -36,6 +36,11 @@ const { chains, publicClient } = configureChains(
   //   projectId: '72f5d80525bd261bb92a76b1426b1ce0',
   //   chains
   // });
+  // const { connectors } = getDefaultWallets({
+  //   appName: '72f5d80525bd261bb92a76b1426b1ce0',
+  //   projectId: 'Payment',
+  //   chains
+  // });
   const connectors = connectorsForWallets([
     {
       groupName: 'Recommended',
