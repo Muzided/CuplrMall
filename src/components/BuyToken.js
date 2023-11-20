@@ -49,7 +49,7 @@ const BuyToken = () => {
     }
     let wei;
     useEffect(() => {
-        if (amount) {
+        if (amount && address) {
             if (chain?.id.toString() === "56") {
                 console.log("we in bnb baby")
                 console.log("token", tokenPerBnb)
@@ -86,7 +86,7 @@ const BuyToken = () => {
             }
         }
 
-    }, [amount])
+    }, [amount,address])
     // const { config } = usePrepareSendTransaction({
     //     to: '0x6DeCe8ae82AA17cB6C529CccEc960B4c6A8ED06F',
     //     value: amountToSend,
